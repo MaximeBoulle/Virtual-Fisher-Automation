@@ -1,31 +1,32 @@
+require('dotenv').config();
 const dc = require('./dc');
 const axios = require('axios');
 
 //Variable start
 
-//Put your username, email, password and token here.
-//Also, do not share this to anyone!
-const email = "email here";
-const password = "password here";
-const token = "token here";
+//Configuration is now loaded from .env file
+//Make sure to update your .env file with your actual credentials
+const email = process.env.EMAIL;
+const password = process.env.PASSWORD;
+const token = process.env.TOKEN;
 //username as in name on your server. If you didn't change your username, just use the default one, example: yourname#0000. use yourname not the number.
-const username = "username here";
+const username = process.env.USERNAME;
 
-//Put your channel ID and server ID here.
+//Server and channel configuration from .env
 //if you don't know where to find, look at this example: https://discord.com/channels/serverID/channelID
 //Note: You must be only the user in the channel, if there's another user, the bot will not work.
-const serverID = "serverID here";
-const channelID = "channelID here";
+const serverID = process.env.SERVER_ID;
+const channelID = process.env.CHANNEL_ID;
 //Actually, you can use this bot to other discord bot, but idk if it works or not because the main target here is Virtual Fisher.
-const botName = "Virtual Fisher";
+const botName = process.env.BOT_NAME || "Virtual Fisher";
 
 let run = 0;
-var cooldown = 3500; //Cooldown in game, in ms. Default is 3500ms. Change to your own cooldown.
-const bait = "Worms"; //Change to your own bait. Default is Worms.
+var cooldown = parseInt(process.env.COOLDOWN) || 3500; //Cooldown in game, in ms. Default is 3500ms. Change in .env file.
+const bait = process.env.BAIT || "Worms"; //Change in .env file. Default is Worms.
 
-//if you want to use this bot to other discord bot, you need to change this captchaTitle and captchaDesc to the captcha title and description of the bot.
-const captchaTitle = "Anti-bot\n/verify <result>";
-const captchaDesc = ":information_source: To continue, solve the captcha posted above with the **/verify** command.\nIf the code is unreadable, you can use the **/verify regen** command.";
+//if you want to use this bot to other discord bot, you need to change this captchaTitle and captchaDesc in the .env file.
+const captchaTitle = process.env.CAPTCHA_TITLE || "Anti-bot\n/verify <result>";
+const captchaDesc = process.env.CAPTCHA_DESC || ":information_source: To continue, solve the captcha posted above with the **/verify** command.\nIf the code is unreadable, you can use the **/verify regen** command.";
 //variable end
 
 (async () => {
